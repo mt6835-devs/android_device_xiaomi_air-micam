@@ -2,7 +2,25 @@
 
 product/priv-app/MiuiCamera/MiuiCamera.apk:system/priv-app/MiuiCamera/MiuiCamera.apk
 system_ext/lib64/libcamera_algoup_jni.xiaomi.so:system/lib64/libcamera_algoup_jni.xiaomi.so
+system_ext/lib64/libcamera_ispinterface_jni.xiaomi.so:system/lib64/libcamera_ispinterface_jni.xiaomi.so
 system_ext/lib64/libcamera_mianode_jni.xiaomi.so:system/lib64/libcamera_mianode_jni.xiaomi.so
+system_ext/lib64/libmtkisp_metadata_sys.so:system/lib64/libmtkisp_metadata_sys.so
+system_ext/lib64/vendor.mediatek.hardware.camera.isphal@1.0.so:system/lib64/vendor.mediatek.hardware.camera.isphal@1.0.so
+system_ext/lib64/vendor.mediatek.hardware.camera.isphal-V1-ndk.so:system/lib64/vendor.mediatek.hardware.camera.isphal-V1-ndk.so
+
+vendor/lib64/com.xiaomi.plugin.memcpy.so
+vendor/lib64/com.xiaomi.plugin.mibokeh.so
+vendor/lib64/com.xiaomi.plugin.morphohdr.so
+vendor/lib64/com.xiaomi.plugin.photosolid.so
+vendor/lib64/com.xiaomi.plugin.skinbeautifier.so
+vendor/lib64/com.xiaomi.plugin.superlowlight.so
+vendor/lib64/com.xiaomi.plugin.swflip.so
+vendor/lib64/libanc_single_bokeh.so
+vendor/lib64/libanc_single_bokeh_rear.so
 vendor/lib64/libcom.xiaomi.pluginutils.so
 vendor/lib64/libmialgoengine.so
 vendor/lib64/libmialgoengine2.so
+vendor/lib64/libmorpho_ImageRefiner.so
+vendor/lib64/libmorpho_ImageRefinerLite.so
+vendor/lib64/libmpbase.so
+vendor/lib64/libTrueSight.so
