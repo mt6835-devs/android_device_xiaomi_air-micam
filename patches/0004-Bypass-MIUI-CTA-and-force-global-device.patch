@@ -1,0 +1,50 @@
+From 8e557f268d6b357426d1e32e39d95b7a4dd4725a Mon Sep 17 00:00:00 2001
+From: suchit-7x <gtsuchit7x@gmail.com>
+Date: Sat, 14 Nov 2026 19:10:17 +0530
+Subject: [PATCH] Bypass MIUI CTA and force global device
+
+---
+ smali/com/android/camera/Camera.smali | 6 ++----
+ smali_classes4/ub/e.smali             | 2 +-
+ 2 files changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/smali/com/android/camera/Camera.smali b/smali/com/android/camera/Camera.smali
+index 3b08c2e..a52b44c 100644
+--- a/smali/com/android/camera/Camera.smali
++++ b/smali/com/android/camera/Camera.smali
+@@ -5003,6 +5003,8 @@
+ 
+     invoke-static {v0, v1, v3}, Lcom/android/camera/log/Log;->d(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
+ 
++    goto/16 :goto_3
++
+     invoke-static {}, Lub/e;->e()Z
+ 
+     move-result v0
+@@ -11675,10 +11677,6 @@
+     if-ne p2, p1, :cond_8
+ 
+     :cond_5
+-    invoke-static {}, Lz7/a;->v0()V
+-
+-    invoke-virtual {p0}, Lcom/android/camera/Camera;->finish()V
+-
+     goto :goto_0
+ 
+     :cond_6
+diff --git a/smali_classes4/ub/e.smali b/smali_classes4/ub/e.smali
+index 883d477..5c035f9 100644
+--- a/smali_classes4/ub/e.smali
++++ b/smali_classes4/ub/e.smali
+@@ -658,7 +658,7 @@
+ .method public static e()Z
+     .locals 1
+ 
+-    sget-boolean v0, Lub/e;->E:Z
++    const/4 v0, 0x1
+ 
+     return v0
+ .end method
+-- 
+2.34.1
+
