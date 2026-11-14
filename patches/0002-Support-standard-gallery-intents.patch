@@ -1,0 +1,99 @@
+From 5c436255d4e895b035fce9cb75e4ea2b4bd8218d Mon Sep 17 00:00:00 2001
+From: suchit-7x <gtsuchit7x@gmail.com>
+Date: Sat, 14 Nov 2026 10:54:58 +0530
+Subject: [PATCH] Support standard gallery intents
+
+---
+ smali/com/android/camera/o6.smali                |  2 +-
+ smali/com/android/camera/r3.smali                | 16 ++++++++--------
+ .../provider/ParallelProcessProvider.smali       | 12 ------------
+ 3 files changed, 9 insertions(+), 21 deletions(-)
+
+diff --git a/smali/com/android/camera/o6.smali b/smali/com/android/camera/o6.smali
+index b28703c8..8de05a7b 100644
+--- a/smali/com/android/camera/o6.smali
++++ b/smali/com/android/camera/o6.smali
+@@ -216,7 +216,7 @@
+ 
+ .field public static d2:Ljava/lang/Boolean; = null
+ 
+-.field public static final e:Ljava/lang/String; = "com.android.camera.action.REVIEW"
++.field public static final e:Ljava/lang/String; = "android.provider.action.REVIEW"
+ 
+ .field public static final e0:I = 0x8c36
+ 
+diff --git a/smali/com/android/camera/r3.smali b/smali/com/android/camera/r3.smali
+index a4d08eb6..06c95980 100644
+--- a/smali/com/android/camera/r3.smali
++++ b/smali/com/android/camera/r3.smali
+@@ -1058,9 +1058,13 @@
+ 
+     invoke-direct {p0, v0}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+ 
+-    const-string v0, "com.miui.gallery"
++    const-string v0, "android.intent.category.APP_GALLERY"
+ 
+-    invoke-virtual {p0, v0}, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
++    invoke-virtual {p0, v0}, Landroid/content/Intent;->addCategory(Ljava/lang/String;)Landroid/content/Intent;
++
++    const v0, 0x10000000
++
++    invoke-virtual {p0, v0}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
+ 
+     invoke-virtual {p1, p0}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
+ 
+@@ -1097,7 +1101,7 @@
+ 
+     move-result p0
+ 
+-    const-string v0, "com.android.camera.action.REVIEW"
++    const-string v0, "android.provider.action.REVIEW"
+ 
+     if-eqz p0, :cond_0
+ 
+@@ -1158,7 +1162,7 @@
+ 
+     const-string p1, "GalleryHelper"
+ 
+-    const-string v1, "gotoGallery: com.android.camera.action.REVIEW"
++    const-string v1, "gotoGallery: android.provider.action.REVIEW"
+ 
+     invoke-static {p1, v1, p0}, Lcom/android/camera/log/Log;->d(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
+ 
+@@ -1167,10 +1171,6 @@
+     invoke-direct {p0, v0, p2}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+ 
+     :goto_0
+-    const-string p1, "com.miui.gallery"
+-
+-    invoke-virtual {p0, p1}, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
+-
+     const-string p1, "from_MiuiCamera"
+ 
+     const/4 p2, 0x1
+diff --git a/smali_classes4/com/xiaomi/camera/parallelservice/provider/ParallelProcessProvider.smali b/smali_classes4/com/xiaomi/camera/parallelservice/provider/ParallelProcessProvider.smali
+index 9758b05b..8f1000c2 100644
+--- a/smali_classes4/com/xiaomi/camera/parallelservice/provider/ParallelProcessProvider.smali
++++ b/smali_classes4/com/xiaomi/camera/parallelservice/provider/ParallelProcessProvider.smali
+@@ -452,18 +452,6 @@
+ 
+     invoke-static {v0, v3, v2}, Lcom/android/camera/log/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+ 
+-    invoke-static {}, Lub/c;->r2()Lub/c;
+-
+-    move-result-object v0
+-
+-    invoke-virtual {v0}, Lub/c;->D2()Z
+-
+-    move-result v0
+-
+-    if-nez v0, :cond_0
+-
+-    const/4 v1, 0x4
+-
+     :cond_0
+     :goto_0
+     return v1
+-- 
+2.34.1
+
