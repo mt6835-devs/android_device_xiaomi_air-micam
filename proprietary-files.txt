@@ -22,4 +22,3 @@ vendor/lib64/libmialgoengine2.so
 vendor/lib64/libmorpho_ImageRefiner.so
 vendor/lib64/libmorpho_ImageRefinerLite.so
 vendor/lib64/libmpbase.so
-vendor/lib64/libTrueSight.so
