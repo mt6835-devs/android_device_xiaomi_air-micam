@@ -1,0 +1,189 @@
+diff --git a/smali/com/android/camera/o6.smali b/smali/com/android/camera/o6.smali
+index 8de05a7b..93f96e86 100644
+--- a/smali/com/android/camera/o6.smali
++++ b/smali/com/android/camera/o6.smali
+@@ -14030,39 +14030,10 @@
+ .end method
+ 
+ .method public static T4(Landroid/app/Activity;)V
+-    .locals 2
+-
+-    invoke-static {}, Lh1/a;->e()Z
+-
+-    move-result v0
+-
+-    if-eqz v0, :cond_0
+-
+-    invoke-virtual {p0}, Landroid/app/Activity;->getWindow()Landroid/view/Window;
+-
+-    move-result-object p0
+-
+-    invoke-virtual {p0}, Landroid/view/Window;->getDecorView()Landroid/view/View;
+-
+-    move-result-object v0
+-
+-    const/16 v1, 0x2300
+-
+-    invoke-virtual {v0, v1}, Landroid/view/View;->setSystemUiVisibility(I)V
+-
+-    const/high16 v0, -0x80000000
+-
+-    invoke-virtual {p0, v0}, Landroid/view/Window;->addFlags(I)V
+-
+-    invoke-virtual {p0}, Landroid/view/Window;->getAttributes()Landroid/view/WindowManager$LayoutParams;
+-
+-    move-result-object p0
+-
+-    const/4 v0, 0x1
++    .locals 0
+ 
+-    iput v0, p0, Landroid/view/WindowManager$LayoutParams;->layoutInDisplayCutoutMode:I
++    invoke-static {p0}, Lpf/c;->b(Landroid/app/Activity;)V
+ 
+-    :cond_0
+     return-void
+ .end method
+ 
+diff --git a/smali_classes4/pf/c$a.smali b/smali_classes4/pf/c$a.smali
+index 99c1bfd7..ee9eb3d5 100644
+--- a/smali_classes4/pf/c$a.smali
++++ b/smali_classes4/pf/c$a.smali
+@@ -30,17 +30,53 @@
+ .end method
+ 
+ .method public static a(Landroid/content/ContentResolver;Ljava/lang/String;)Z
+-    .locals 0
++    .locals 2
+ 
+     :try_start_0
+-    invoke-static {p0, p1}, Landroid/provider/MiuiSettings$Global;->getBoolean(Landroid/content/ContentResolver;Ljava/lang/String;)Z
++    const-string v0, "force_fsg_nav_bar"
++
++    invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v0
++
++    if-eqz v0, :cond_0
++
++    const-string v0, "navigation_mode"
++
++    const/4 v1, 0x0
++
++    invoke-static {p0, v0, v1}, Landroid/provider/Settings$Secure;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
++
++    move-result v0
++
++    const/4 v1, 0x2
++
++    if-ne v0, v1, :cond_0
++
++    const/4 p0, 0x1
++
++    return p0
++
++    :cond_0
++    const/4 v0, 0x0
++
++    invoke-static {p0, p1, v0}, Landroid/provider/Settings$Global;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+ 
+     move-result p0
+-    :try_end_0
+-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
++
++    if-eqz p0, :cond_1
++
++    const/4 p0, 0x1
+ 
+     return p0
+ 
++    :cond_1
++    const/4 p0, 0x0
++
++    return p0
++    :try_end_0
++    .catchall {:try_start_0 .. :try_end_0} :catchall_0
++
+     :catchall_0
+     const/4 p0, 0x0
+ 
+diff --git a/smali_classes4/pf/c.smali b/smali_classes4/pf/c.smali
+index 4bab7754..92b9b007 100644
+--- a/smali_classes4/pf/c.smali
++++ b/smali_classes4/pf/c.smali
+@@ -21,3 +21,49 @@
+ 
+     return-void
+ .end method
++
++.method public static b(Landroid/app/Activity;)V
++    .locals 3
++
++    invoke-virtual {p0}, Landroid/app/Activity;->getWindow()Landroid/view/Window;
++
++    move-result-object p0
++
++    const/high16 v0, 0xc000000
++
++    invoke-virtual {p0, v0}, Landroid/view/Window;->clearFlags(I)V
++
++    const/high16 v0, -0x80000000
++
++    invoke-virtual {p0, v0}, Landroid/view/Window;->addFlags(I)V
++
++    const/4 v0, 0x0
++
++    invoke-virtual {p0, v0}, Landroid/view/Window;->setNavigationBarColor(I)V
++
++    invoke-virtual {p0, v0}, Landroid/view/Window;->setStatusBarColor(I)V
++
++    invoke-virtual {p0, v0}, Landroid/view/Window;->setNavigationBarContrastEnforced(Z)V
++
++    invoke-virtual {p0, v0}, Landroid/view/Window;->setDecorFitsSystemWindows(Z)V
++
++    invoke-virtual {p0}, Landroid/view/Window;->getDecorView()Landroid/view/View;
++
++    move-result-object v1
++
++    const/16 v2, 0x700
++
++    invoke-virtual {v1, v2}, Landroid/view/View;->setSystemUiVisibility(I)V
++
++    invoke-virtual {p0}, Landroid/view/Window;->getAttributes()Landroid/view/WindowManager$LayoutParams;
++
++    move-result-object v1
++
++    const/4 v2, 0x1
++
++    iput v2, v1, Landroid/view/WindowManager$LayoutParams;->layoutInDisplayCutoutMode:I
++
++    invoke-virtual {p0, v1}, Landroid/view/Window;->setAttributes(Landroid/view/WindowManager$LayoutParams;)V
++
++    return-void
++.end method
+diff --git a/smali_classes5/miuix/appcompat/internal/app/widget/ActionBarOverlayLayout.smali b/smali_classes5/miuix/appcompat/internal/app/widget/ActionBarOverlayLayout.smali
+index 3794eceb..7cb85374 100644
+--- a/smali_classes5/miuix/appcompat/internal/app/widget/ActionBarOverlayLayout.smali
++++ b/smali_classes5/miuix/appcompat/internal/app/widget/ActionBarOverlayLayout.smali
+@@ -3019,8 +3019,21 @@
+ .end method
+ 
+ .method public final n(Landroid/view/View;Landroid/graphics/Rect;ZZZZ)Z
+-    .locals 1
++    .locals 2
++
++    invoke-virtual {p1}, Landroid/view/View;->getId()I
++
++    move-result v0
++
++    const v1, 0x1020002
++
++    if-ne v0, v1, :cond_skip_content
++
++    const/4 p0, 0x0
++
++    return p0
+ 
++    :cond_skip_content
+     invoke-virtual {p1}, Landroid/view/View;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
+ 
+     move-result-object p0
