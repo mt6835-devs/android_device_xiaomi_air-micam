@@ -18,6 +18,7 @@ from extract_utils.main import (
 
 namespace_imports = [
     'device/xiaomi/air-micam',
+    'vendor/xiaomi/air',
 ]
 
 blob_fixups: blob_fixups_user_type = {
