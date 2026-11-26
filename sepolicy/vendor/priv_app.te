@@ -8,6 +8,5 @@ allow priv_app_36 vendor_camera_data_file:file { getattr open read };
 
 # Properties
 get_prop(priv_app_36, vendor_camera_prop)
-get_prop(priv_app_36, vendor_camera_persist_prop)
 get_prop(priv_app_36, vendor_mtk_audio_prop)
 get_prop(priv_app_36, vendor_mi_prop)
